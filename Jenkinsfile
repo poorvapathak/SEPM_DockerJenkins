@@ -3,15 +3,14 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/name/myfirst.git'
+                // Since the code is already checked out by Jenkins, no need to re-clone it
+                echo 'Code already checked out by Declarative SCM. Skipping extra git clone.'
             }
         }
         stage('Build Docker Image') {
             steps {
-                dir('DockerJenkinsExperiment') {
-                    sh 'ls -l'
-                    sh 'docker build -t my-docker-webapp .'
-                }
+                sh 'ls -l'
+                sh 'docker build -t my-docker-webapp .'
             }
         }
         stage('Run Docker Container') {
